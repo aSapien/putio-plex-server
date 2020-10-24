@@ -8,10 +8,10 @@ services:
       - PGID=1000
       - TZ=Asia/Jerusalem
     volumes:
-      - ~/medusa/config:/config
-      - ~/medusa/tv:/tv
-      - ~/medusa/downloads:/downloads
-      - ~/medusa/scripts:/scripts
+      - /home/dimar/medusa/config:/config
+      - /home/dimar/medusa/tv:/tv
+      - /home/dimar/medusa/downloads:/downloads
+      - /home/dimar/medusa/scripts:/scripts
     ports:
       - 8081:8081
     restart: unless-stopped
@@ -27,6 +27,6 @@ services:
       - UMASK_SET=022 #optional
       - PLEX_CLAIM= #optional
     volumes:
-      - ~/config:/config
-      - ~/plex:/plex
+      - /home/dimar/config:/config
+      - /home/dimar/plex:/plex
     restart: unless-stopped

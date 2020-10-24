@@ -6,7 +6,7 @@ After=rclone-mount.service docker.service network-online.target dhcpd.service
 [Service]
 Restart=on-failure
 EnvironmentFile=/var/local/variables.env
-ExecStart=${HOME_DIR}/torrent_auto_unrar.sh
+ExecStart=/bin/bash ${HOME_DIR}/putio-plex-server/torrent_auto_unrar.sh
 
 [Install]
 WantedBy=multi-user.target

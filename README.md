@@ -38,6 +38,22 @@ TORRENT_BLACKHOLE_DIR="$HOME_DIR/medusa/downloads" # default
 PUTIO_AUTH_TOKEN="YOUR_APP_TOKEN" # Create a put.io app and copy the token here
 PUTIO_PARENT_ID="REMOTE_)DIR_ID" # Target put.io directory parent id (can be copied from the url)
 ```
-3. 
+3. `cd` into the directory of this repo and start the service units
 
+```bash
+sudo systemctl link ./rclone-mount.service
+sudo systemctl enable rclone-mount.service
+sudo systemctl start rclone-mount.service
 
+sudo systemctl link ./blackhole-torrent-uploader.service
+sudo systemctl enable blackhole-torrent-uploader.service
+sudo systemctl start blackhole-torrent-uploader.service
+
+sudo systemctl link ./torrent-auto-unrar.service
+sudo systemctl enable torrent-auto-unrar.service
+sudo systemctl start torrent-auto-unrar.service
+
+sudo systemctl link ./docker-compose.service
+sudo systemctl enable docker-compose.service
+sudo systemctl start docker-compose.service
+```

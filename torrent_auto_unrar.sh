@@ -1,5 +1,6 @@
 #!/bin/env /bin/bash
-echo "Starting Torrent Unrarer Withing mounted put.io folder";
+echo "Starting Torrent Unrarer Withing mounted put.io folder [ $HOME_DIR/plex/tv ]";
+
 inotifywait --monitor --recursive "$HOME_DIR/plex/tv" -e create -e moved_to |
     while read path action file; do
         

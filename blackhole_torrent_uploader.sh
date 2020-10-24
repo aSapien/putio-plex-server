@@ -1,5 +1,5 @@
 #!/bin/env /bin/bash
-echo "Starting Blackhole Torrent Uploader";
+echo "Starting Blackhole Torrent Uploader at $TORRENT_BLACKHOLE_DIR";
 inotifywait -m "$TORRENT_BLACKHOLE_DIR" -e create -e moved_to |
     while read path action file; do
         
