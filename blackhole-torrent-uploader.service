@@ -1,0 +1,12 @@
+[Unit]
+Description=Blackhole-Torrent-PutIO-Uploader
+Requires=multi-user.target
+After=network-online.target dhcpd.service
+
+[Service]
+Restart=on-failure
+EnvironmentFile=/var/local/variables.env
+ExecStart=${HOME_DIR}/blackhole_torrent_uploader.sh
+
+[Install]
+WantedBy=multi-user.target

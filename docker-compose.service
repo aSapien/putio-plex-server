@@ -1,0 +1,13 @@
+[Unit]
+Description=Medusa-and-Plex
+Requires=rclone-mount.service docker.service blackhole-torrent-uploader.service multi-user.target
+After=rclone-mount.service docker.service network-online.target dhcpd.service
+
+[Service]
+Restart=always
+EnvironmentFile=/var/local/variables.env
+ExecStart=/usr/bin/docker-compose --file ${HOME_DIR}/docker-compose.yml up --no-recreate
+ExecStop=/usr/bin/docker-compose --file ${HOME_DIR}/docker-compose.yml stop
+
+[Install]
+WantedBy=multi-user.target

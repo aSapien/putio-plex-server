@@ -1,0 +1,17 @@
+[Unit]
+Description=Rclone-Mount-Putio
+Requires=multi-user.target
+After=network-online.target dhcpd.service
+
+[Service]
+Type=oneshot
+EnvironmentFile=/var/local/variables.env
+RemainAfterExit=yes
+Restart=no
+ExecStart=/usr/bin/rclone mount putio:/tv/ ${HOME_DIR}/plex/tv/ --allow-other --daemon
+ExecStart=/usr/bin/rclone mount putio:/movies/ ${HOME_DIR}/plex/movies/ --allow-other --daemon
+ExecStop=/usr/bin/fusermount -u ${HOME_DIR}/plex/tv/
+ExecStop=/usr/bin/fusermount -u ${HOME_DIR}/plex/movies/
+
+[Install]
+WantedBy=multi-user.target
