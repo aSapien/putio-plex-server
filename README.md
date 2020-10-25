@@ -38,7 +38,8 @@ TORRENT_BLACKHOLE_DIR="$HOME_DIR/medusa/downloads" # default
 PUTIO_AUTH_TOKEN="YOUR_APP_TOKEN" # Create a put.io app and copy the token here
 PUTIO_PARENT_ID="REMOTE_)DIR_ID" # Target put.io directory parent id (can be copied from the url)
 ```
-3. `cd` into the directory of this repo and start the service units
+3. Clone this repo into your home folder
+4. `cd` into the directory of this repo and start the service units
 
 ```bash
 sudo systemctl link ./rclone-mount.service
