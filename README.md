@@ -1,6 +1,6 @@
 ## A setup for wiring together Plex Media player, PutIO and Medusa.
 
-This is complete plan to run an end-to-end torrent-to-plex automation.
+This is complete plan to run an end-to-end torrent-to-plex automation with support for private trackers via PyMedusa.
 
 ### Components:
 - [PyMedusa](https://github.com/pymedusa/Medusa) - Automatic Video Library Manager
