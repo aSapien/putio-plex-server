@@ -8,10 +8,10 @@ services:
       - PGID=1000
       - TZ=Asia/Jerusalem
     volumes:
-      - ${HOME_DIR}/medusa/config:/config
-      - ${HOME_DIR}/medusa/tv:/tv
-      - ${HOME_DIR}/medusa/downloads:/downloads
-      - ${HOME_DIR}/medusa/scripts:/scripts
+      - data/medusa/config:/config
+      - data/medusa/tv:/tv
+      - data/medusa/downloads:/downloads
+      - data/medusa/scripts:/scripts
     ports:
       - 8081:8081
     restart: unless-stopped
@@ -30,3 +30,20 @@ services:
       - ${HOME_DIR}/config:/config
       - ${HOME_DIR}/plex:/plex
     restart: unless-stopped
+  rclone_putio_mount:
+    container_name: torrents_uploader
+    network_mode: host
+    restart: unless-stopped
+  torrents_unarchiver:
+    container_name: torrents_unarchiver
+    network_mode: host
+    restart: unless-stopped
+    depends_on:
+      - rclone_putio_mount
+  torrents_uploader:
+    container_name: torrents_uploader
+    network_mode: host
+    restart: unless-stopped
+
+volumes:
+  data:
