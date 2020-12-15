@@ -7,6 +7,7 @@ This is complete plan to run an end-to-end torrent-to-plex automation with suppo
 - [Plex](https://www.plex.tv/) - Streamer and transcoder
 - [put.io](https://put.io/)- Torrent Cloud Storage
 - [RClone](https://rclone.org/) - Mount the remote as file system on a mountpoint.
+- [YDNS](ydns.eu) - DynamicDNS
 - [inotifywait](https://linux.die.net/man/1/inotifywait) - Wait for changes to files using inotify
 - [unrar](https://wiki.archlinux.org/index.php/rar#UNRAR) - Decompress RAR archives
 - [Docker-Compose](https://docs.docker.com/compose/reference/overview/) - Multi Container Orchestrator
@@ -28,6 +29,7 @@ docker-compose
 rclone
 unrar
 inotifywait
+cronie
 
 #### Steps:
 1. Setup rclone and put.io. [Guide](https://help.put.io/en/articles/3480094-plex-rclone), [Docs](https://rclone.org/putio/).
@@ -40,21 +42,21 @@ PUTIO_PARENT_ID="REMOTE_)DIR_ID" # Target put.io directory parent id (can be cop
 ```
 3. Clone this repo into your home folder
 4. `cd` into the directory of this repo and start the service units
+    ```bash
+    sudo systemctl link ./rclone-mount.service
+    sudo systemctl enable rclone-mount.service
+    sudo systemctl start rclone-mount.service
 
-```bash
-sudo systemctl link ./rclone-mount.service
-sudo systemctl enable rclone-mount.service
-sudo systemctl start rclone-mount.service
+    sudo systemctl link ./blackhole-torrent-uploader.service
+    sudo systemctl enable blackhole-torrent-uploader.service
+    sudo systemctl start blackhole-torrent-uploader.service
 
-sudo systemctl link ./blackhole-torrent-uploader.service
-sudo systemctl enable blackhole-torrent-uploader.service
-sudo systemctl start blackhole-torrent-uploader.service
+    sudo systemctl link ./torrent-auto-unrar.service
+    sudo systemctl enable torrent-auto-unrar.service
+    sudo systemctl start torrent-auto-unrar.service
 
-sudo systemctl link ./torrent-auto-unrar.service
-sudo systemctl enable torrent-auto-unrar.service
-sudo systemctl start torrent-auto-unrar.service
-
-sudo systemctl link ./docker-compose.service
-sudo systemctl enable docker-compose.service
-sudo systemctl start docker-compose.service
-```
+    sudo systemctl link ./docker-compose.service
+    sudo systemctl enable docker-compose.service
+    sudo systemctl start docker-compose.service
+    ```
+5. Setup a DynamicDNS with YDNS and setup the [automatic updater cron](https://github.com/ydns/bash-updater#crontab-setup)
